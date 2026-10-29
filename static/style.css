@@ -1,0 +1,163 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5f9;
+    color: #222;
+}
+
+header {
+    background: #243b55;
+    color: white;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+}
+
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 18px;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.card,
+.panel {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #555;
+}
+
+.card p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.income {
+    color: #16834a;
+}
+
+.expense {
+    color: #d13c3c;
+}
+
+.panel {
+    margin-bottom: 24px;
+}
+
+.panel h2 {
+    margin-top: 0;
+}
+
+input,
+select,
+button {
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+input,
+select {
+    max-width: 100%;
+}
+
+.panel > form:not(.filters) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+button {
+    background: #243b55;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters input {
+    flex: 1;
+    min-width: 150px;
+}
+
+.filters a {
+    padding: 11px;
+    color: #243b55;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #f7f8fb;
+}
+
+.delete {
+    background: #c0392b;
+}
+
+.message {
+    padding: 12px;
+    background: #e5f6e9;
+    border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+    main {
+        margin-top: 18px;
+    }
+
+    .card,
+    .panel {
+        padding: 16px;
+    }
+}
+

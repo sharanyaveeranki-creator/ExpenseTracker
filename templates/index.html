@@ -1,0 +1,103 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="summary">
+    <div class="card">
+        <h3>Total Income</h3>
+        <p class="income">₹{{ "%.2f"|format(income) }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Expenses</h3>
+        <p class="expense">₹{{ "%.2f"|format(expenses) }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Balance</h3>
+        <p>₹{{ "%.2f"|format(balance) }}</p>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Add Transaction</h2>
+
+    <form method="POST">
+        <input type="text" name="title" placeholder="Transaction title" required>
+
+        <input type="number" name="amount" placeholder="Amount in ₹"
+               min="0.01" step="0.01" required>
+
+        <select name="category" required>
+            <option value="">Select type</option>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+        </select>
+
+        <input type="date" name="date" required>
+        <button type="submit">Add Transaction</button>
+    </form>
+</section>
+
+<section class="panel">
+    <h2>Transaction History</h2>
+
+    <form method="GET" class="filters">
+        <input type="text" name="search" placeholder="Search title"
+               value="{{ search }}">
+
+        <select name="category">
+            <option value="">All Transactions</option>
+            <option value="Income"
+                {% if selected_category == 'Income' %}selected{% endif %}>
+                Income
+            </option>
+            <option value="Expense"
+                {% if selected_category == 'Expense' %}selected{% endif %}>
+                Expense
+            </option>
+        </select>
+
+        <button type="submit">Search</button>
+        <a href="{{ url_for('index') }}">Clear</a>
+    </form>
+
+    {% if transactions %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in transactions %}
+                <tr>
+                    <td>{{ item['date'] }}</td>
+                    <td>{{ item['title'] }}</td>
+                    <td>{{ item['category'] }}</td>
+                    <td>₹{{ "%.2f"|format(item['amount']) }}</td>
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('delete_transaction', transaction_id=item['id']) }}"
+                              onsubmit="return confirm('Delete this transaction?')">
+                            <button class="delete" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No transactions found. Add one to get started!</p>
+    {% endif %}
+</section>
+
+{% endblock %}
+
